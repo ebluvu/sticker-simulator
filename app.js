@@ -132,10 +132,8 @@ class StickerSandbox {
     });
 
     this.messageInput.addEventListener("keydown", event => {
-      if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        this.handleSubmit();
-      }
+      // 移除 Enter 鍵的送出功能，讓 Enter 鍵在所有設備上都用於換行
+      // 用戶可以通過點擊發送按鈕來送出訊息
     });
 
     // 自動調整 textarea 高度
