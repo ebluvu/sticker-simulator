@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>離線貼圖模擬器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="studio" id="app">
+      <section class="phone" data-theme="sunrise" aria-live="polite">
+        <div class="phone__glass">
+          <div class="status-bar">
+            <span class="time" id="status-time">5:10 PM</span>
+            <img src="./assets/ios-status.png" alt="狀態圖示" class="status-icons" />
+          </div>
+          <header class="chat-header">
+            <button class="chat-header__btn back" aria-label="返回"></button>
+            <div class="chat-header__meta">
+              <p class="title">聊天室</p>
+            </div>
+            <button
+              class="chat-header__btn more"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="header-menu"
+            ></button>
+            <div class="header-menu" id="header-menu" role="menu">
+              <div class="menu-themes">
+                <button class="theme-circle is-active" data-theme="sunrise" title="晨曦"></button>
+                <button class="theme-circle" data-theme="midnight" title="午夜"></button>
+                <button class="theme-circle" data-theme="mint" title="薄荷"></button>
+              </div>
+              <button class="menu-icon" data-action="export" title="輸出 PNG">🖼️</button>
+              <button class="menu-icon" data-action="clear" title="清除對話">🗑️</button>
+            </div>
+          </header>
+          <div class="chat">
+            <div class="chat__scroll" id="chat-scroll">
+              <ul class="chat__list" id="chat-list"></ul>
+            </div>
+            <div class="chat__empty" id="empty-state">
+              <p>還沒有訊息，輸入文字或加入貼圖來開始吧！</p>
+            </div>
+          </div>
+          <footer class="composer" aria-label="輸入區">
+            <button class="author-toggle" data-author="receive">夥伴</button>
+            <label class="composer__field">
+              <span class="sr-only">訊息內容</span>
+              <textarea
+                id="message-input"
+                placeholder="Aa"
+                maxlength="120"
+                autocomplete="off"
+                rows="1"
+              ></textarea>
+              <button
+                class="emoji-btn"
+                data-toggle="stickers"
+                aria-expanded="false"
+                title="貼圖收納"
+                type="button"
+              >
+                🙂
+              </button>
+              <button
+                class="send-float"
+                id="send-float"
+                data-action="send"
+                title="傳送訊息"
+                type="button"
+                style="display: none;"
+              >
+                𖤂
+              </button>
+            </label>
+            <button class="author-toggle is-active" data-author="send">自己</button>
+          </footer>
+          <div class="sticker-drawer" aria-hidden="true">
+            <div class="sticker-drawer__tabs">
+              <button class="tab-add" data-action="add-pack" title="新增貼圖包">+</button>
+              <div class="tab-list" id="sticker-tabs"></div>
+            </div>
+            <div class="sticker-drawer__content">
+              <div class="sticker-drawer__grid" id="sticker-grid" data-empty="true">
+                <p>請先選擇或新增貼圖包</p>
+              </div>
+              <input type="file" id="sticker-input" accept="image/*" multiple hidden />
+              <button class="sticker-add-float" id="sticker-add-float" data-action="pick-sticker" style="display: none;" title="加入貼圖">+</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <template id="message-template">
+      <li class="bubble" data-author="">
+        <div class="avatar" aria-hidden="true">
+          <span>👤</span>
+        </div>
+        <div class="bubble__body">
+          <p class="bubble__text"></p>
+          <figure class="bubble__sticker">
+            <img alt="自訂貼圖" loading="lazy" />
+          </figure>
+        </div>
+        <time class="bubble__time"></time>
+      </li>
+    </template>
+
+    <template id="sticker-thumb-template">
+      <button class="sticker-thumb" type="button">
+        <img alt="自訂貼圖縮圖" loading="lazy" />
+      </button>
+    </template>
+
+    <template id="sticker-tab-template">
+      <button class="sticker-tab" type="button">
+        <img alt="貼圖包縮圖" loading="lazy" />
+      </button>
+    </template>
+
+    <script defer src="./app.js"></script>
+  </body>
+</html>
+
